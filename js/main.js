@@ -1,11 +1,10 @@
-// main.js - исправленная версия
+// main.js - исправленная версия с правильной работой вкладок
 (function() {
     console.log('main.js запущен');
 
     const SUPABASE_URL = 'https://eqzulsgpnkmkdbygqata.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_3rpJAQ5CxxoSVOm4iSsaoQ_NlEUk4mD';
     
-    // Проверяем, что Supabase загружен
     if (!window.supabase) {
         console.error('Supabase не загружен!');
         return;
@@ -19,12 +18,14 @@
     async function loadContent() {
         console.log('Загрузка контента, тип:', currentType);
         
+        // Строим запрос
         let query = supabase
             .from('content')
             .select('*')
             .eq('status', 'approved')
             .order('created_at', { ascending: false });
 
+        // Применяем фильтр по типу (если не 'all')
         if (currentType !== 'all') {
             query = query.eq('type', currentType);
         }
@@ -33,10 +34,13 @@
         
         if (error) {
             console.error('Ошибка Supabase:', error);
-            document.getElementById('mapsGrid').innerHTML = '<div class="error">Ошибка загрузки: ' + error.message + '</div>';
+            const gridEl = document.getElementById('mapsGrid');
+            if (gridEl) gridEl.innerHTML = '<div class="error">Ошибка загрузки: ' + error.message + '</div>';
             return;
         }
 
+        console.log('Получено данных:', data.length);
+        
         const statsEl = document.getElementById('stats');
         const gridEl = document.getElementById('mapsGrid');
         
@@ -75,6 +79,32 @@
         });
     }
 
+    function setupTabs() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        console.log('Найдено табов:', tabs.length);
+        
+        // Убираем старые обработчики и добавляем новые
+        tabs.forEach(btn => {
+            // Удаляем старый обработчик, если есть (через cloneNode)
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+            
+            newBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Клик по вкладке:', newBtn.dataset.type);
+                
+                // Убираем active у всех
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                // Добавляем active текущей
+                newBtn.classList.add('active');
+                // Меняем тип
+                currentType = newBtn.dataset.type;
+                // Перезагружаем контент
+                loadContent();
+            });
+        });
+    }
+
     // Ждём загрузки DOM
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
@@ -85,19 +115,5 @@
     } else {
         setupTabs();
         loadContent();
-    }
-
-    function setupTabs() {
-        const tabs = document.querySelectorAll('.tab-btn');
-        console.log('Найдено табов:', tabs.length);
-        
-        tabs.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabs.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentType = btn.dataset.type;
-                loadContent();
-            });
-        });
     }
 })();
