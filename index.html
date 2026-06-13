@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Spawner — карты, ресурспаки, датапаки</title>
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="pixel-bg"></div>
+    
+    <div class="container">
+        <header class="pixel-header">
+            <div class="logo">
+                <span class="spawner-egg">🥚</span>
+                <h1>CONTENT<span class="accent">SPAWNER</span></h1>
+                <span class="spawner-flame">🔥</span>
+            </div>
+            <p class="subtitle">Спавним контент вместе</p>
+            <div class="header-buttons">
+                <a href="add.html" class="pixel-btn green">➕ Добавить контент</a>
+            </div>
+        </header>
+
+        <div class="top-panel">
+            <button class="tab-btn active" data-type="all">📦 Всё</button>
+            <button class="tab-btn" data-type="map">🗺️ Карты</button>
+            <button class="tab-btn" data-type="resourcepack">🖌️ Ресурспаки</button>
+            <button class="tab-btn" data-type="datapack">📜 Датапаки</button>
+        </div>
+
+        <div class="stats" id="stats">Загрузка...</div>
+
+        <div id="mapsGrid" class="maps-grid"></div>
+    </div>
+
+    <footer class="pixel-footer">
+        <p>© 2026 Content Spawner — неофициальный сайт сообщества</p>
+        <p>Все карты принадлежат их авторам</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // ВСТАВЬ СВОИ КЛЮЧИ СЮДА
+        const SUPABASE_URL = 'https://eqzulsgpnkmkdbygqata.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_3rpJAQ5CxxoSVOm4iSsaoQ_NlEUk4mD';
+    </script>
+</body>
+</html>

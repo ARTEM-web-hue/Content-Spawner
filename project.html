@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Spawner — проект</title>
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="pixel-bg"></div>
+    
+    <div class="container">
+        <header class="pixel-header">
+            <div class="logo">
+                <span class="spawner-egg">🥚</span>
+                <h1>CONTENT<span class="accent">SPAWNER</span></h1>
+            </div>
+            <a href="index.html" class="pixel-btn small">← На главную</a>
+        </header>
+
+        <div id="projectContent" class="project-container">
+            <div class="loading">Загрузка...</div>
+        </div>
+    </div>
+
+    <script src="js/project.js"></script>
+    <script>
+        const SUPABASE_URL = 'https://eqzulsgpnkmkdbygqata.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_3rpJAQ5CxxoSVOm4iSsaoQ_NlEUk4mD';
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить контент — Content Spawner</title>
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="pixel-bg"></div>
+    
+    <div class="container">
+        <header class="pixel-header">
+            <div class="logo">
+                <span class="spawner-egg">🥚</span>
+                <h1>CONTENT<span class="accent">SPAWNER</span></h1>
+            </div>
+            <a href="index.html" class="pixel-btn small">← На главную</a>
+        </header>
+
+        <div class="form-container">
+            <h2>📤 Добавить контент</h2>
+            <p class="form-note">После проверки ваш контент появится на сайте</p>
+            
+            <form id="addForm">
+                <div class="form-group">
+                    <label>Название *</label>
+                    <input type="text" id="title" required placeholder="Например: Паркур на 50 уровней">
+                </div>
+
+                <div class="form-group">
+                    <label>Тип *</label>
+                    <select id="type" required>
+                        <option value="map">🗺️ Карта</option>
+                        <option value="resourcepack">🖌️ Ресурспак</option>
+                        <option value="datapack">📜 Датапак</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Описание *</label>
+                    <textarea id="description" rows="5" required placeholder="Расскажите о вашем контенте..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Прямая ссылка на скачивание *</label>
+                    <input type="url" id="download_url" required placeholder="https://github.com/.../releases/download/.../file.zip">
+                    <small>Ссылка на GitHub Release или любой другой хостинг</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Ссылка на картинку (PNG)</label>
+                    <input type="url" id="image_url" placeholder="https://.../screenshot.png">
+                    <small>Оставьте пустым, если нет картинки</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Версия Minecraft</label>
+                    <input type="text" id="version" placeholder="1.20.4, 1.21...">
+                </div>
+
+                <div class="form-group">
+                    <label>Ваш ник *</label>
+                    <input type="text" id="author" required placeholder="Как вас указать как автора?">
+                </div>
+
+                <div class="form-group">
+                    <label>Ссылка на донат (необязательно)</label>
+                    <input type="url" id="donate_url" placeholder="https://boosty.to/... или https://patreon.com/...">
+                    <small>Пользователи смогут поддержать вас</small>
+                </div>
+
+                <button type="submit" class="pixel-btn green" style="width: 100%;">🚀 Отправить на модерацию</button>
+            </form>
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script src="js/add.js"></script>
+    <script>
+        const SUPABASE_URL = 'https://eqzulsgpnkmkdbygqata.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_3rpJAQ5CxxoSVOm4iSsaoQ_NlEUk4mD';
+    </script>
+</body>
+</html>
